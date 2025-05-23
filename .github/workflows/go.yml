@@ -13,6 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      ENV: ${{ secrets.ENV }}
       LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
       LEETCODE_SESSION: ${{ secrets.LEETCODE_SESSION }}
       SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
