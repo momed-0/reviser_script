@@ -28,13 +28,14 @@ func MakeGraphqlRequest(body map[string]any, user models.User) *http.Response {
 func MakeRESTRequest(payload map[string]any, endpoint string, method string, headers map[string]string) error {
 
 	client := &http.Client{}
-	var payloadBytes []byte
+	var req *http.Request
+
 	if payload == nil {
-		payloadBytes = []byte{}
+		req, _ = http.NewRequest(method, endpoint, nil)
 	} else {
-		payloadBytes, _ = json.Marshal(payload)
+		payloadBytes, _ := json.Marshal(payload)
+		req, _ = http.NewRequest(method, endpoint, bytes.NewBuffer(payloadBytes))
 	}
-	req, _ := http.NewRequest(method, endpoint, bytes.NewBuffer(payloadBytes))
 
 	for key, value := range headers {
 		req.Header.Set(key, value)
