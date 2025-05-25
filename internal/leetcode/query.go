@@ -18,12 +18,12 @@ func GetRecentAcceptedSubmissions(user *models.User) []models.Submission {
 		}
 	}`
 	// fetch past 8 submissions
-	variables := map[string]interface{}{
+	variables := map[string]any{
 		"username": user.GetUser(),
 		"limit":    8,
 	}
 
-	body := map[string]interface{}{
+	body := map[string]any{
 		"query":     query,
 		"variables": variables,
 	}
@@ -54,11 +54,11 @@ func GetProblemDescription(slug string, user *models.User) string {
 		}
 	}`
 
-	variables := map[string]interface{}{
+	variables := map[string]any{
 		"titleSlug": slug,
 	}
 
-	body := map[string]interface{}{
+	body := map[string]any{
 		"query":     query,
 		"variables": variables,
 	}
@@ -91,11 +91,11 @@ func GetSubmissionCodeByID(id string, user *models.User) string {
 		}
 	}`
 
-	variables := map[string]interface{}{
+	variables := map[string]any{
 		"submissionId": id,
 	}
 
-	body := map[string]interface{}{
+	body := map[string]any{
 		"query":     query,
 		"variables": variables,
 	}

@@ -14,7 +14,7 @@ func InsertSubmission(sub models.Submission, code string, user *models.User) err
 	timestamp := time.Unix(timestampInt, 0).Format(time.RFC3339)
 
 	// Insert leetcode_submissions
-	subPayload := map[string]interface{}{
+	subPayload := map[string]any{
 		"submission_id": sub.ID,
 		"question_slug": sub.TitleSlug,
 		"submitted_at":  timestamp,
