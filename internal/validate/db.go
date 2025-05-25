@@ -9,7 +9,15 @@ import (
 	"reviser_script/internal/request"
 )
 
-func CheckDBCredentialsAreLoaded(user models.User) {
+func CheckCredentialsAreLoaded(user models.User) {
+	if user.GetUser() == "" || user.GetSession() == "" {
+		log.Println("Leetcode credentials are not loaded!!!")
+		os.Exit(1)
+	}
+	checkDBCredentialsAreLoaded(user)
+}
+
+func checkDBCredentialsAreLoaded(user models.User) {
 	if user.GetDbKey() == "" || user.GetDbURL() == "" {
 		log.Println("DB credentials are not loaded!!!")
 		os.Exit(1)
