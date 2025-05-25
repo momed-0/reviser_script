@@ -41,7 +41,7 @@ func main() {
 		description := leetcode.GetProblemDescription(sub.TitleSlug, user)
 		code := leetcode.GetSubmissionCodeByID(sub.ID, user)
 
-		// skip inserting it to db , if response is empty
+		// skip inserting it to db , if responses are empty
 		if description == "" || code == "" {
 			log.Printf("Skipping DB insert case of empty response for: %s\n", sub.TitleSlug)
 			continue

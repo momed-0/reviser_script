@@ -7,7 +7,7 @@ import (
 	"reviser_script/internal/request"
 )
 
-func GetRecentAcceptedSubmissions(user models.User) []models.Submission {
+func GetRecentAcceptedSubmissions(user *models.User) []models.Submission {
 	query := `
 	query recentAcSubmissions($username: String!, $limit: Int!) {
 		recentAcSubmissionList(username: $username, limit: $limit) {
@@ -20,7 +20,7 @@ func GetRecentAcceptedSubmissions(user models.User) []models.Submission {
 	// fetch past 8 submissions
 	variables := map[string]interface{}{
 		"username": user.GetUser(),
-		"limit":    1,
+		"limit":    8,
 	}
 
 	body := map[string]interface{}{
@@ -46,7 +46,7 @@ func GetRecentAcceptedSubmissions(user models.User) []models.Submission {
 	return data.Data.RecentSubmissionList
 }
 
-func GetProblemDescription(slug string, user models.User) string {
+func GetProblemDescription(slug string, user *models.User) string {
 	query := `
 	query questionContent($titleSlug: String!) {
 		question(titleSlug: $titleSlug) {
@@ -83,7 +83,7 @@ func GetProblemDescription(slug string, user models.User) string {
 	return data.Data.Question.Content
 }
 
-func GetSubmissionCodeByID(id string, user models.User) string {
+func GetSubmissionCodeByID(id string, user *models.User) string {
 	query := `
 	query submissionDetails($submissionId: Int!) {
 		submissionDetails(submissionId: $submissionId) {

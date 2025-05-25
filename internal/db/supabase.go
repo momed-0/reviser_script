@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func InsertSubmission(sub models.Submission, code string, user models.User) error {
+func InsertSubmission(sub models.Submission, code string, user *models.User) error {
 
 	timestampInt, _ := strconv.ParseInt(sub.Timestamp, 10, 64)
 	timestamp := time.Unix(timestampInt, 0).Format(time.RFC3339)
@@ -39,7 +39,7 @@ func InsertSubmission(sub models.Submission, code string, user models.User) erro
 	return nil
 }
 
-func UpsertQuestion(sub models.Submission, description string, user models.User) error {
+func UpsertQuestion(sub models.Submission, description string, user *models.User) error {
 	// UPSERT leetcode_questions
 	questionPayload := map[string]any{
 		"slug":        sub.TitleSlug,

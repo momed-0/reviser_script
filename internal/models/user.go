@@ -24,8 +24,8 @@ func (u *User) GetDbKey() string {
 	return u.Database_Key
 }
 
-func CreateUser() User {
-	return User{Username: os.Getenv("LEETCODE_USERNAME"),
+func CreateUser() *User {
+	return &User{Username: os.Getenv("LEETCODE_USERNAME"),
 		Session_Cookie: os.Getenv("LEETCODE_SESSION"),
 		Database_URL:   os.Getenv("SUPABASE_URL"),
 		Database_Key:   os.Getenv("SUPABASE_ANON_KEY")}

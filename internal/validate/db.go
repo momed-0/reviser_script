@@ -9,7 +9,11 @@ import (
 	"reviser_script/internal/request"
 )
 
-func CheckCredentialsAreLoaded(user models.User) {
+func CheckCredentialsAreLoaded(user *models.User) {
+	if user == nil {
+		log.Println("User model is nil, cannot validate credentials!")
+		os.Exit(1)
+	}
 	if user.GetUser() == "" || user.GetSession() == "" {
 		log.Println("Leetcode credentials are not loaded!!!")
 		os.Exit(1)
@@ -17,7 +21,7 @@ func CheckCredentialsAreLoaded(user models.User) {
 	checkDBCredentialsAreLoaded(user)
 }
 
-func checkDBCredentialsAreLoaded(user models.User) {
+func checkDBCredentialsAreLoaded(user *models.User) {
 	if user.GetDbKey() == "" || user.GetDbURL() == "" {
 		log.Println("DB credentials are not loaded!!!")
 		os.Exit(1)
@@ -29,7 +33,7 @@ func checkDBCredentialsAreLoaded(user models.User) {
 	}
 }
 
-func checkSupabaseConnection(user models.User) error {
+func checkSupabaseConnection(user *models.User) error {
 
 	headers := map[string]string{
 		"apikey":        user.GetDbKey(),

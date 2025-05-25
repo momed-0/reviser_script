@@ -11,7 +11,7 @@ import (
 	"reviser_script/internal/models"
 )
 
-func MakeGraphqlRequest(body map[string]any, user models.User) *http.Response {
+func MakeGraphqlRequest(body map[string]any, user *models.User) *http.Response {
 	jsonBody, _ := json.Marshal(body)
 	req, _ := http.NewRequest("POST", "https://leetcode.com/graphql", bytes.NewBuffer(jsonBody))
 	req.Header.Set("Content-Type", "application/json")
