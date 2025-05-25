@@ -40,7 +40,12 @@ func checkSupabaseConnection(user *models.User) error {
 		"Authorization": "Bearer " + user.GetDbKey(),
 	}
 
-	err := request.MakeRESTRequest(nil,
+	// placeholder to test connection
+	payload := map[string]any{
+		"submission_id": 127883,
+	}
+
+	err := request.MakeRESTRequest(payload,
 		user.GetDbURL()+"/rest/v1/leetcode_questions?limit=1",
 		"GET",
 		headers)

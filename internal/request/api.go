@@ -30,12 +30,8 @@ func MakeRESTRequest(payload map[string]any, endpoint string, method string, hea
 	client := &http.Client{}
 	var req *http.Request
 
-	if payload == nil {
-		req, _ = http.NewRequest(method, endpoint, nil)
-	} else {
-		payloadBytes, _ := json.Marshal(payload)
-		req, _ = http.NewRequest(method, endpoint, bytes.NewBuffer(payloadBytes))
-	}
+	payloadBytes, _ := json.Marshal(payload)
+	req, _ = http.NewRequest(method, endpoint, bytes.NewBuffer(payloadBytes))
 
 	for key, value := range headers {
 		req.Header.Set(key, value)
