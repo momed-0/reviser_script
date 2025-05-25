@@ -42,6 +42,9 @@ func MakeRESTRequest(payload map[string]any, endpoint string, method string, hea
 	}
 	res, err := client.Do(req)
 	if err != nil || res.StatusCode >= 300 {
+		if res.StatusCode == 409 {
+			return fmt.Errorf("conflict Error: It seems like the record already exists in the database")
+		}
 		return fmt.Errorf("failed Request: Status Code %d", res.StatusCode)
 	}
 	defer res.Body.Close()
