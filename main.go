@@ -29,7 +29,7 @@ func init() {
 func main() {
 	user := models.CreateUser()
 
-	validate.CheckDBCredentialsAreLoaded(user)
+	validate.CheckCredentialsAreLoaded(user)
 
 	submissions := leetcode.GetRecentAcceptedSubmissions(user)
 
@@ -41,6 +41,11 @@ func main() {
 		description := leetcode.GetProblemDescription(sub.TitleSlug, user)
 		code := leetcode.GetSubmissionCodeByID(sub.ID, user)
 
+		// skip inserting it to db , if response is empty
+		if description == "" || code == "" {
+			log.Printf("Skipping DB insert case of empty response for: %s\n", sub.TitleSlug)
+			continue
+		}
 		err := db.InsertSubmissionToDB(user, sub, code, description)
 		if err != nil {
 			log.Println("Error inserting:", err)

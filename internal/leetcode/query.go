@@ -78,7 +78,7 @@ func GetProblemDescription(slug string, user models.User) string {
 	json.NewDecoder(resp.Body).Decode(&data)
 
 	if data.Data.Question.Content == "" {
-		log.Printf("code for %s returned empty response!!\n", slug)
+		log.Printf("Description for %s returned empty response!!\n", slug)
 	}
 	return data.Data.Question.Content
 }
